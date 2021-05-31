@@ -7,25 +7,16 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: password
+    url: ${MEALY_DB_URL:jdbc:mysql://localhost:3307/mealy}
+    username: ${MEALY_DB_USERNAME:mealyuser}
+    password: ${MEALY_DB_PASSWORD:mealypass}
 
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-
-#  datasource:
-#    url: ${MEALY_DB_URL:jdbc:mysql://localhost:3306/mealy}
-#    username: ${MEALY_DB_USERNAME:mealyuser}
-#    password: ${MEALY_DB_PASSWORD:mealypass}
-#
-#  jpa:
-#    hibernate.ddl-auto: none
-#    properties.hibernate:
-#      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-#      jdbc.time_zone: UTC
-#      temp.use_jdbc_metadata_defaults: false
+    hibernate.ddl-auto: none
+    properties.hibernate:
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      jdbc.time_zone: UTC
+      temp.use_jdbc_metadata_defaults: false
 
 # Actuator
 management:
