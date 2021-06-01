@@ -16,16 +16,16 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class RestExceptionHandler {
 
-    @ExceptionHandler(StiBusinessException.class)
+    @ExceptionHandler(MealyBusinessException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY, reason = "Business logic error")
-    protected ResponseEntity<String> handleBusinessException(StiBusinessException exception) {
+    protected ResponseEntity<String> handleBusinessException(MealyBusinessException exception) {
         log.error("Business error: " + exception.getMessage());
         return buildErrorResponse(exception, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
-    @ExceptionHandler(StiNotFoundException.class)
+    @ExceptionHandler(MealyNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    protected ResponseEntity<String> handleNotFoundException(StiNotFoundException exception) {
+    protected ResponseEntity<String> handleNotFoundException(MealyNotFoundException exception) {
         log.error("Not found error: " + exception.getMessage());
         return buildErrorResponse(exception, HttpStatus.NOT_FOUND);
     }

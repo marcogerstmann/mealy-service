@@ -1,6 +1,6 @@
 package com.marcogerstmann.mealy.common.base;
 
-import com.marcogerstmann.mealy.common.enums.StiEntity;
+import com.marcogerstmann.mealy.common.enums.MealyEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Nonnull;
@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public interface BaseService<V extends BaseVo> {
+public interface BaseService<V extends BaseDto> {
 
     @Nonnull
     List<V> findAll();
@@ -26,5 +26,5 @@ public interface BaseService<V extends BaseVo> {
 
     void deleteById(UUID id);
 
-    V createOrUpdate(StiEntity entity, V vo, @Nullable UUID id);
+    V createOrUpdate(MealyEntity entity, V vo, @Nullable UUID id);
 }

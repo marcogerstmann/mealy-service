@@ -9,7 +9,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @ParametersAreNonnullByDefault
-public class BaseVo {
+public class BaseDto {
 
     private UUID id;
 

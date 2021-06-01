@@ -1,7 +1,7 @@
 package com.marcogerstmann.mealy.common.base;
 
-import com.marcogerstmann.mealy.common.enums.StiEntity;
-import com.marcogerstmann.mealy.common.exception.StiNotFoundException;
+import com.marcogerstmann.mealy.common.enums.MealyEntity;
+import com.marcogerstmann.mealy.common.exception.MealyNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @ParametersAreNonnullByDefault
 @Transactional
-public abstract class BaseServiceImpl<T, V extends BaseVo> implements BaseService<V> {
+public abstract class BaseServiceImpl<T, V extends BaseDto> implements BaseService<V> {
 
     private final JpaRepository<T, UUID> repository;
     private final AbstractConverter<T, V> converter;
@@ -51,7 +51,7 @@ public abstract class BaseServiceImpl<T, V extends BaseVo> implements BaseServic
     public V updateById(UUID id, V vo) {
         return repository.findById(id)
                 .map(entity -> save(converter.updateEntityFromVo(entity, vo)))
-                .orElseThrow(() -> new StiNotFoundException(StiEntity.UNSPECIFIED, id));
+                .orElseThrow(() -> new MealyNotFoundException(MealyEntity.UNSPECIFIED, id));
     }
 
     @Override
@@ -60,11 +60,11 @@ public abstract class BaseServiceImpl<T, V extends BaseVo> implements BaseServic
     }
 
     @Override
-    public V createOrUpdate(StiEntity entity, V vo, @Nullable UUID id) {
+    public V createOrUpdate(MealyEntity entity, V vo, @Nullable UUID id) {
         if (id != null) {
             repository.findById(id)
                     .filter(v -> id.equals(vo.getId()))
-                    .orElseThrow(() -> new StiNotFoundException(entity, vo.getId()));
+                    .orElseThrow(() -> new MealyNotFoundException(entity, vo.getId()));
         }
 
         return create(vo);

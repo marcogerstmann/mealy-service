@@ -1,24 +1,19 @@
-package com.marcogerstmann.mealy.spaceshipservice;
+package com.marcogerstmann.mealy.grocerylistitem;
 
 import com.marcogerstmann.mealy.common.base.BaseEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = true)
-public class SpaceshipService extends BaseEntity {
+public class GroceryListItem extends BaseEntity {
 
     @NotNull
     @NotBlank
-    String name;
-
-    @NotNull
-    private UUID orbId;
+    private String text;
 
 }
